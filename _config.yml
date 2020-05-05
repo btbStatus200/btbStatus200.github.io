@@ -28,7 +28,7 @@ twitter_username: none
 github_username:  btbStatus200
 
 # Build settings
-theme: minima
+theme: jekyll-theme-tactile
 plugins:
   - jekyll-feed
 
