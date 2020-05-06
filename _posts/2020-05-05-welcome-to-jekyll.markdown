@@ -6,7 +6,7 @@ categories: [analysis, vulnerability, security, aarogya-setu]
 permalink: /aarogya-setu/
 ---
 
-These are my observations from reverse engineering Aarogya Setu's APK. It must be highlughted though, that a) I am not a trained or experienced hacker, but a developer who looked at it purely from a security-conscious developer's perspective. A trained hacker will most definitely be able to point out several other vulnerabilities that I must have missed.  
+These are my observations from reverse engineering Aarogya Setu's APK. It must be highlighted though, that a) I am not a trained or experienced hacker, but a developer who looked at it purely from a security-conscious developer's perspective. A trained hacker will most definitely be able to point out several other vulnerabilities that I must have missed.  
 
 # Permissions
 
@@ -23,7 +23,7 @@ Let’s start with the list of permissions this app requires., because generally
 
 Next, let’s look a couple of problems in the app code itself.
 
-A major problem from a security perspective is that the app stores user tokens in shared preferences in their raw form. On Android, shared preferences (as the name suggests) are shared amongst all apps installed on a phone. What that means is that it will only take one malicious app (out of what? Around 100 that most people have on their phones) to access a user’s token. It would have been different if the token was encryped, or was not stored in a location exclusively available to the app. A related problem is that the same lax attitude can be seen when handling api keys and authorization header values.
+A major problem from a security perspective is that the app stores user tokens in shared preferences in their raw form. On Android, shared preferences (as the name suggests) are shared amongst all apps installed on a phone. What that means is that it will only take one malicious app (out of what? Around 100 that most people have on their phones) to access a user’s token. It would have been different if the token was encryped, or was stored in a location exclusively available to the app. A related problem is that the same lax attitude can be seen when handling api keys and authorization header values.
 
 ![Screenshot 1](/assets/img/as_1.png)
 
@@ -75,14 +75,14 @@ Yet another problem is the fact that there is decompiled bit code in there that 
 ***
 <br/>
 
-The next major problem is how the app goes through your contacts list. Given how a contact lookup returns not just the number, but other, sensitive details (like how many times have you contacted them, which group have you added them to, their photo, display pic etc), teh app’s sweeping lookup parameters are problematic. 
+The next major problem is how the app goes through your contacts list. Given how a contact lookup returns not just the number, but other sensitive details as well (like how many times have you contacted them, which group have you added them to, their photo, display pic etc), the app’s sweeping lookup parameters are problematic. 
 
 ![Screenshot 7](/assets/img/as_7.png)
 
 ***
 <br/>
 
-Last, but not the least, even the storage mechanism outside the app is not very secure, but that was expected given how easily the authorization headers and api keys were accessible in the app itself. This whole exercise putting a lot of unconsented for data of users and non-users at risk.
+Last, but not the least, even the storage mechanism outside the app is not very secure, but that was expected given how easily the authorization headers and api keys were accessible in the app itself. This whole exercise is putting a lot of unconsented for data of users and non-users at risk.
 
 ***
 <br/>
